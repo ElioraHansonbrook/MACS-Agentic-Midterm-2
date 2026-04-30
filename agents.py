@@ -26,6 +26,14 @@ class AxelrodAgent(Agent):
     def getCultureNumber_int(self):
         return self.culture[0]*10**4 * self.culture[0]*10**3 * self.culture[0]*10**2 * self.culture[0]*10**1 * self.culture[0]*10**0
 
+    ## Calculate the degree of cultural similarity between two agents
+    def getCulturalSimilarity(self, otherAgent: AxelrodAgent):
+        assert(len(self.culture)==len(otherAgent.culture))
+        acc = 0
+        for i in range(0,len(self.culture)-1):
+            acc += int(self.culture[i]==otherAgent.culture[i])
+        return acc/len(self.culture)
+
     @property
     def culture(self):
         return self._culture
