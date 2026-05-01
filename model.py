@@ -48,9 +48,7 @@ class AxelrodModel(Model):
     def collectGroups(self):
         acc = set()
         for agent in self.agents:
-            if agent.getCultureNumber_int() not in acc:
-                acc.add(agent.getCultureNumber_int())
-        print(acc)
+            acc.add(agent.getCultureNumber_int())
         return len(acc)
 
     def step(self):
