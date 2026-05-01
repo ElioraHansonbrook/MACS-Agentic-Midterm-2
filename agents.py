@@ -13,6 +13,8 @@ class AxelrodAgent(Agent):
     def __init__(
             self,
             model,
+            # Culture vector, with single digit values for each trait
+            # in line with the *original* Axelrod description
             culture = [0,0,0,0,0,]
             ):
         super().__init__(model)
