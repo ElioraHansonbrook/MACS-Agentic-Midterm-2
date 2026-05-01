@@ -26,7 +26,7 @@ class AxelrodModel(Model):
         )
         for i in range(0,10):
             for j in range(0,10):
-                AxelrodAgent(
+                agent = AxelrodAgent(
                     model = self,
                     #Randomly seed culture of agents with single digit values
                     culture = [
@@ -37,13 +37,22 @@ class AxelrodModel(Model):
                         random.randint(0,9),
                     ]
                     )
+                self.space.place_agent(agent, pos=(i,j))
     
-    def move(self):
+    def step(self):
         # Confirm number of agents is as expected
         assert(len(self.agents)==self.width*self.height)
-
+        # for agent in self.agents:
+        #     agent.outline = None
+        agent = self.agents[random.randint(0, len(self.agents)-1)]
+        # agent.outline = "red"
+        neighbor = random.choice(self.space.get_neighbors(moore=False, pos=agent.pos))
+        similarity = agent.getCulturalSimilarity(neighbor)
+        if similarity != 1 and random.randint(0,100)/100 < similarity:
+            location = random.choice(agent.culturePositionDifferenceLocations(neighbor))
+            agent.culture[location] = neighbor.culture[location]
 
 if __name__ == "__main__":
     # Testing board
     model = AxelrodModel()
-    model.move()
+    model.step()
