@@ -25,7 +25,7 @@ class AxelrodAgent(Agent):
 
     ## An O(1) complexity, presumed high speed implementation of calculating the culture number
     def getCultureNumber_int(self):
-        return self.culture[0]*10**4 * self.culture[0]*10**3 * self.culture[0]*10**2 * self.culture[0]*10**1 * self.culture[0]*10**0
+        return self.culture[0]*10**4 + self.culture[1]*10**3 + self.culture[2]*10**2 + self.culture[3]*10**1 + self.culture[4]*10**0
 
     ## Calculate the degree of cultural similarity between two agents
     ## O(n) complexity

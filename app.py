@@ -25,6 +25,8 @@ def propertylayer_portrayal(layer):
 
     )
 
+groupsCountPlot = make_plot_component("same")
+
 
 state_space = make_mpl_space_component(
     agent_portrayal=agent_portrayal,
@@ -49,6 +51,7 @@ page = SolaraViz(
     components=[
         state_space,
         # Plots
+        groupsCountPlot,
     ],
     model_params=model_params,
     name="Axelrod Replication",

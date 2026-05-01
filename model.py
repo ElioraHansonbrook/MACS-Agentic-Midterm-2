@@ -9,7 +9,7 @@ model.py
 from agents import AxelrodAgent
 from pathlib import Path
 import numpy as np
-from mesa import Model
+from mesa import Model, DataCollector
 from mesa.space import SingleGrid
 import random
 
@@ -38,7 +38,21 @@ class AxelrodModel(Model):
                     ]
                     )
                 self.space.place_agent(agent, pos=(i,j))
+        self.datacollector = DataCollector(
+            model_reporters = {
+                "same" : self.collectGroups
+            }
+        )
+        self.datacollector.collect(self)
     
+    def collectGroups(self):
+        acc = set()
+        for agent in self.agents:
+            if agent.getCultureNumber_int() not in acc:
+                acc.add(agent.getCultureNumber_int())
+        print(acc)
+        return len(acc)
+
     def step(self):
         # Confirm number of agents is as expected
         assert(len(self.agents)==self.width*self.height)
@@ -51,6 +65,7 @@ class AxelrodModel(Model):
         if similarity != 1 and random.randint(0,100)/100 < similarity:
             location = random.choice(agent.culturePositionDifferenceLocations(neighbor))
             agent.culture[location] = neighbor.culture[location]
+        self.datacollector.collect(self)
 
 if __name__ == "__main__":
     # Testing board
