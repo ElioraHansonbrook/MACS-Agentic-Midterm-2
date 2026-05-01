@@ -18,13 +18,7 @@ def agent_portrayal(agent):
     return AgentPortrayalStyle(
         # Set the color based on cultural traits
         # The trailing five fills the sixth digit in a hexadecimal string
-        color="#" + agent.getCultureNumber_string() + "5",
-        # This was used for diagnostics
-        edgecolors=agent.outline,
-        # This doesn't seem to work for some reason; I wanted larger agents
-        size=250,
-        # This is also vestigal
-        marker="o",
+        color="#" + agent.getCultureNumber_string() + "5"
     )
 
 ## Set the property layer portrayal
@@ -46,7 +40,12 @@ state_space = make_mpl_space_component(
 
 ## Define variable model parameters
 model_params = {
-    #Dictionary Format
+    # Dictionary Format
+    # Added these controls just for fun; not in Axelrod's core description
+    # But these variables were supplied by Axelrod to the model
+    # So there is some relation to the paper.
+    "width": Slider("Space Width", value=10, min=10, max=100, step=1),
+    "height": Slider("Space Height", value=10, min=10, max=100, step=1),
 }
 
 ##Temporary variable - random number generator seed
