@@ -17,15 +17,19 @@ import random
 class AxelrodModel(Model):
     def __init__(self, seed = None, rng = None, width = 10, height = 10, agentCount = 100):
         super().__init__(seed=seed, rng=rng)
+        # Height of the model
         self.height = height
+        # Width of the model
         self.width = width
+        # Instantiate the space in which agents act
         self.space = SingleGrid(
             width = width,
             height = height,
+            # No wrap, to conform to model
             torus=False
         )
-        for i in range(0,10):
-            for j in range(0,10):
+        for i in range(0,width):
+            for j in range(0,height):
                 agent = AxelrodAgent(
                     model = self,
                     #Randomly seed culture of agents with single digit values
